@@ -10,7 +10,7 @@ The service is built and deployed using VSCode. When using Azure Functions it's 
 
 To run locally:
 
-Running Azure functions locally is not straightforward.  It's necessary to have the vscode extension, Azurite, installed to simulate azure cloud storage. Microsoft learn is great [here]("https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code"). 
+Running Azure functions locally is not straightforward.  It's necessary to have the vscode extension, Azurite, installed to simulate azure cloud storage. Microsoft learn is great [here](https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code). 
 
 Remember to replace `REGION`, `USER`, `PASSWORD` with your own Snowflake credentials and match the Schema to the one provided. You can add these env variables in the configuration once the function is deployed. 
 
