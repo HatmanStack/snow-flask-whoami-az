@@ -1,5 +1,5 @@
-Flask==2.0.1
-pandas==1.4.4
-snowflake-connector-python==2.8.0
-Werkzeug==2.2.2
+Flask
+pandas
+snowflake-connector-python
+Werkzeug
 azure-functions

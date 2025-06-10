@@ -43,7 +43,8 @@ def thanks4submit():
 cnx = connector.connect(
     account=os.environ.get('REGION'),
     user=os.environ.get('USERNAME'),
-    password=os.environ.get('PASSWORD'),
+    private_key_file='rsa_key.p8',
+    private_key_file_pwd=os.environ.get('PASSWORD'),
     warehouse='COMPUTE_WH',
     database='DEMO_DB',
     schema='PUBLIC',
