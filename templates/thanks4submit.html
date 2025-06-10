@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank You</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        a {
+            text-decoration: none;
+            color: steelblue;
+        }
+        .thank-you-card {
+            background-color: rgba(50, 50, 50, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+        }
+        .navigation {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-card">
+        <h1>Thank You!</h1>
+        <p>Your submission has been received.</p>
+        <p>Address: <strong>{{colorname}}</strong></p>
+        <p>Name: <strong>{{username}}</strong></p>
+    </div>
+    
+    <div class="navigation">
+        <a href="/">Back to Home</a> | <a href="/HardData">View All Data</a> | <a href="/Submit">Submit Another</a>
+    </div>
+</body>
+</html>

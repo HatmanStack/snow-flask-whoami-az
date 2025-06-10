@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Data Visualization</title>
+    
+    <!-- Three.js for 3D visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/DragControls.js"></script>
+    
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            overflow: hidden;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        a {
+            text-decoration: none;
+            color: steelblue;
+        }
+        #threejs-table {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .instructions {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Three.js canvas for interactive table -->
+    <canvas id="threejs-table"></canvas>
+    
+    <!-- Hidden data for Three.js -->
+    <script id="table-data" type="application/json">{{interactive_table_data | safe}}</script>
+    
+    <!-- Overlay with navigation links -->
+    <div class="overlay">
+        <h1>Interactive Data Visualization</h1>
+        <p><a href="/">Back to Home</a> | <a href="/Submit">Submit New Data</a></p>
+    </div>
+    
+    <!-- Instructions overlay -->
+    <div class="instructions">
+        <h3>Instructions:</h3>
+        <p>- Click and drag cards to move them</p>
+        <p>- Use mouse wheel to zoom in/out</p>
+        <p>- Right-click and drag to rotate the view</p>
+    </div>
+    
+    <!-- Three.js interactive table script -->
+    <script src="/static/interactive-table.js"></script>
+</body>
+</html>

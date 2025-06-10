@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Address Chart</title>
+    <meta charset="utf-8" />
+    
+    <!-- Vega-Lite for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
+    
+    <!-- Three.js for 3D visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/DragControls.js"></script>
+
+    <style>
+      body {
+        background-color: black;
+        margin: 0;
+        overflow: hidden;
+      }
+      a {
+        text-decoration: none;
+        color: steelblue;
+      }
+      #threejs-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      .content {
+        position: relative;
+        z-index: 1;
+      }
+      #vis {
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Three.js background canvas -->
+    <canvas id="threejs-background"></canvas>
+    
+    <!-- Hidden data for Three.js -->
+    <script id="threejs-data" type="application/json">{{threejs_stream_data | safe}}</script>
+    
+    <div class="content">
+      <h1 style="text-align: center;color: white;">Name Check</h1>
+      
+      <table style="width: 100%;">
+        <tr>
+          <td>
+            <p style="text-align: center;">
+              <a href="https://www.gemenielabs.com/projects">
+                <img src="https://www.gemenielabs.com/wp-content/uploads/2022/08/logo.svg" alt="Gemenie Labs">
+              </a>
+            </p>
+            <br>
+            <p style="text-align: center;">
+              <img class="center" src="https://www.gemenielabs.com/wp-content/uploads/2022/10/bar.svg" alt="">
+            </p>
+            <br>
+            <br>
+            <h2 style="text-align:center;"><a href="/Submit">Submit Address</a></h2>
+            <br>
+            <h2 style="text-align:center;"><a href="/HardData">Hard Data</a></h2>
+          </td>
+          <td><div id="vis"></div></td>
+        </tr>
+      </table>
+    </div>
+    
+    <!-- Vega-Lite chart script -->
+    <script>
+      var vlSpec = {
+        "$schema": "https://vega.github.io/schema/vega/v5.json",
+        "width": 1200,
+        "height": 700,
+        "padding": 5,
+        
+        "data": [
+          {
+            "name": "table",
+            "values": {{data4chartsJSON | safe}}   
+          }
+        ],
+
+        "signals": [
+          {
+            "name": "tooltip",
+            "value": {},
+            "on": [
+              {"events": "rect:mouseover", "update": "datum"},
+              {"events": "rect:mouseout",  "update": "{}"}
+            ]
+          }
+        ],
+
+        "scales": [
+          {
+            "name": "xscale",
+            "type": "band",
+            "domain": {"data": "table", "field": "NAME"},
+            "range": "width",
+            "padding": .05,
+            "round": true
+          },
+          {
+            "name": "yscale",
+            "domain": {"data": "table", "field": "vote"},
+            "nice": true,
+            "range": "height"
+          }
+        ],
+
+        "axes": [
+          { "orient": "bottom",
+            "title" : "NAME",
+            "scale": "xscale",
+            "labelColor": "white",
+            "titlePadding" : 20,
+            "encode": {
+              "title":{
+              "update": {
+                "fontSize": {"value": 18},
+                "fill" : {"value": "white"}
+                }
+              }
+            }
+          },
+          { "orient": "left",
+           "title" : "COUNT",
+           "scale": "yscale",
+           "labelColor": "white",
+           "encode": {
+              "title":{
+              "update": {
+                "fontSize": {"value": 18},
+                "fill" : {"value": "white"}
+                }
+              }
+            }
+          }
+        ],
+
+        "marks": [
+          {
+            "type": "rect",
+            "from": {"data":"table"},
+            "encode": {
+              "enter": {
+                "x": {"scale": "xscale", "field": "NAME", "label":{"fill":{"value":"white"}}},
+                "width": {"scale": "xscale", "band": 1},
+                "y": {"scale": "yscale", "field": "vote"},
+                "y2": {"scale": "yscale", "value": 0}
+              },
+              "update": {
+                "fill": {"value": "steelblue"}
+                
+              },
+              "hover": {
+                "fill": {"value": "red"}
+              }
+           
+            }
+          },
+          {
+            "type": "text",
+            "encode": {
+              "enter": {
+                "align": {"value": "center"},
+                "baseline": {"value": "bottom"}
+              },
+              "update": {
+                "x": {"scale": "xscale", "signal": "tooltip.category", "band": 1},
+                "y": {"scale": "yscale", "signal": "tooltip.amount", "offset": -2},
+                "text": {"signal": "tooltip.amount"},
+                "fillOpacity": [
+                  {"test": "isNaN(tooltip.amount)", "value": 0},
+                  {"value": 1}
+                ]
+              }
+            }
+          }
+        ]
+      };
+      vegaEmbed('#vis', vlSpec);
+    </script>
+    
+    <!-- Three.js background script -->
+    <script src="/static/threejs-background.js"></script>
+  </body>
+</html>

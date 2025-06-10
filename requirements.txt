@@ -1,9 +1,5 @@
-# DO NOT include azure-functions-worker in this file
-# The Python Worker is managed by Azure Functions platform
-# Manually managing azure-functions-worker may cause unexpected issues
-
+Flask==2.0.1
+pandas==1.4.4
+snowflake-connector-python==2.8.0
+Werkzeug==2.2.2
 azure-functions
-Flask
-docutils
-pandas
-snowflake-connector-python

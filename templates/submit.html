@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Information</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        a {
+            text-decoration: none;
+            color: steelblue;
+        }
+        form {
+            background-color: rgba(50, 50, 50, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: none;
+        }
+        input[type="submit"] {
+            background-color: steelblue;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #4682b4;
+        }
+        .navigation {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Submit Your Information</h1>
+    
+    <form action="/thanks4submit" method="post">
+        <div>
+            <label for="cname">Address:</label>
+            <input type="text" id="cname" name="cname" required>
+        </div>
+        <div>
+            <label for="uname">Name:</label>
+            <input type="text" id="uname" name="uname" required>
+        </div>
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+    
+    <div class="navigation">
+        <a href="/">Back to Home</a> | <a href="/HardData">View Data</a>
+    </div>
+</body>
+</html>
