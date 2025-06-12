@@ -1,5 +1,6 @@
-Flask
+flask
 pandas
 snowflake-connector-python
-Werkzeug
 azure-functions
+numpy==1.26.4
+python-dotenv

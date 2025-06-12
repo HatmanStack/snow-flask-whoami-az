@@ -5,7 +5,12 @@ import pandas as pd
 import os
 import json
 
-app = Flask(__name__)
+STATIC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static'))
+TEMPLATES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates'))
+KEY_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'rsa_key.p8'))
+
+app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
+
 
 @app.route('/')
 def homepage():
@@ -41,10 +46,10 @@ def thanks4submit():
     
 # Snowflake connection
 cnx = connector.connect(
-    account=os.environ.get('REGION'),
-    user=os.environ.get('USERNAME'),
-    private_key_file='rsa_key.p8',
-    private_key_file_pwd=os.environ.get('PASSWORD'),
+    account=os.environ.get('SNOW_ACCOUNT'),
+    user=os.environ.get('SNOW_USERNAME'),
+    private_key_file=KEY_FILE,
+    private_key_file_pwd=os.environ.get('SNOW_PASSWORD'),
     warehouse='COMPUTE_WH',
     database='DEMO_DB',
     schema='PUBLIC',

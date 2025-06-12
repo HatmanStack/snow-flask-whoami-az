@@ -1,1 +1,5 @@
 rsa_key.p8
+.venv
+local.settings.json
+.python_packages
+snow-flask-whoami-az/__pycache__

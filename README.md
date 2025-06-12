@@ -3,7 +3,7 @@
 A serverless Flask application deployed on Azure Functions with HTTP triggers, featuring interactive Three.js visualizations and real-time Snowflake database connectivity.
 
 ## 🚀 Live Application
-**URL**: https://snow-flask-whoami-az.azurewebsites.net/Home
+**URL**: https://snow-flask-whoami-az.azurewebsites.net/
 
 ## ✨ Features
 
@@ -27,7 +27,7 @@ A serverless Flask application deployed on Azure Functions with HTTP triggers, f
 ### Services Used
 | Service | Purpose | Configuration |
 |---------|---------|---------------|
-| **Azure Functions** | Serverless compute | Python 3.9 runtime, HTTP trigger |
+| **Azure Functions** | Serverless compute | Python 3.11 runtime, HTTP trigger |
 | **App Service Plan** | Hosting platform | Consumption-based pricing |
 | **Storage Account** | Function metadata | General-purpose v2 storage |
 | **Application Insights** | Monitoring & logging | Performance monitoring |
@@ -36,7 +36,7 @@ A serverless Flask application deployed on Azure Functions with HTTP triggers, f
 
 - **Azure CLI** (v2.30+) - [Installation Guide](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 - **Azure Functions Core Tools** (v4.x) - [Installation Guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local)
-- **Python 3.9+** with pip
+- **Python 3.11+** with pip
 - **Snowflake account** with database access
 - **Azure subscription** with appropriate permissions
 
@@ -88,7 +88,7 @@ az functionapp create \
   --resource-group snow-flask-rg \
   --consumption-plan-location eastus \
   --runtime python \
-  --runtime-version 3.9 \
+  --runtime-version 3.11 \
   --functions-version 4 \
   --name snow-flask-whoami-az \
   --storage-account snowflaskstorageacct \
@@ -101,10 +101,12 @@ az functionapp create \
 az functionapp config appsettings set \
   --name snow-flask-whoami-az \
   --resource-group snow-flask-rg \
+  --settings 
   --settings \
-    USERNAME="your_snowflake_username" \
-    PASSWORD="your_private_key_passphrase" \
-    REGION="your_snowflake_region"
+    FUNCTIONS_WORKER_RUNTIME=python \
+    SNOW_USERNAME="your_snowflake_username" \
+    SNOW_PASSWORD="your_private_key_passphrase" \
+    SNOW_ACCOUNT="your_snowflake_account"
 ```
 
 ### 6. Deploy Function
@@ -137,14 +139,15 @@ Create `local.settings.json`:
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "python",
-    "USERNAME": "your_snowflake_username",
-    "PASSWORD": "your_private_key_passphrase",
-    "REGION": "your_snowflake_region"
+    "SNOW_USERNAME": "your_snowflake_username",
+    "SNOW_PASSWORD": "your_private_key_passphrase",
+    "SNOW_ACCOUNT": "your_snowflake_region"
   }
 }
 ```
 
 ### Local Testing
+Install Azure Functions Core Tools: https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local
 ```bash
 # Start Azure Functions runtime locally
 func start
@@ -236,7 +239,7 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.9'
+        python-version: '3.11'
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Deploy to Azure Functions
@@ -262,4 +265,11 @@ az functionapp config set \
   --name snow-flask-whoami-az \
   --resource-group snow-flask-rg \
   --prewarmed-instance-count 1
+```
+
+
+### Notes
+Azure Function deployment differs from other major serverless cloud providers.  They have a two tiered system to manage the app in the root folder and then build and deploy the app from function folders usting something like the vercel/react router naming conventions using folders. Make sure to make the necessary changes to folders(static/templates) and security files to reflect that. eg. 
+```bash
+KEY_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'rsa_key.p8'))
 ```
