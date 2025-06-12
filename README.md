@@ -191,20 +191,21 @@ az functionapp log deployment list \
 
 ## 🗂️ Project Structure
 ```
-snow-flask-whoami-az/
-├── __init__.py             # Python package marker
-├── function.json           # Function binding configuration
-├── host.json              # Function app host configuration
-├── requirements.txt        # Python dependencies
-├── rsa_key.p8             # Snowflake private key
-├── static/                # Frontend assets
-│   ├── cards.js          # 3D card interactions
-│   └── threejs-background.js # Background animations
-└── templates/             # Jinja2 HTML templates
-    ├── index.html        # Homepage with charts
-    ├── charts.html       # Data visualization page
-    ├── submit.html       # Data entry form
-    └── thanks4submit.html # Confirmation page
+├── host.json           # Function app host configuration
+├── README.md
+├── requirements.txt    # Python dependencies
+├── rsa_key.p8          # Snowflake private key
+├── snow-flask-whoami-az
+│   ├── function.json   # Function binding configuration
+│   ├── __init__.py     # Python package marker entry
+├── static              # Frontend assets
+│   ├── cards.js        # 3D card interactions
+│   └── threejs-background.js     # Background animations
+└── templates           # Jinja2 HTML templates
+    ├── charts.html     # Homepage with charts
+    ├── index.html      # Data visualization page
+    ├── submit.html     # Data entry form
+    └── thanks4submit.html  # Confirmation page
 ```
 
 ## 🔐 Security Considerations
