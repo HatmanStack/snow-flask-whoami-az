@@ -4,7 +4,9 @@ import os
 import sys
 
 # Add parent directories to path for snow_flask_core imports
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+sys.path.insert(
+    0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+)
 
 import azure.functions as func
 
@@ -13,7 +15,9 @@ from snow_flask_core.database import SnowflakeDB
 from snow_flask_core.logging_config import setup_logging
 
 STATIC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static"))
-TEMPLATES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "templates"))
+TEMPLATES_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "templates")
+)
 KEY_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "rsa_key.p8"))
 
 setup_logging()
