@@ -1,6 +1,7 @@
 """Azure Functions entry point for snow-flask-whoami."""
-import sys
+
 import os
+import sys
 
 # Add parent directories to path for snow_flask_core imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -11,9 +12,9 @@ from snow_flask_core import create_app
 from snow_flask_core.database import SnowflakeDB
 from snow_flask_core.logging_config import setup_logging
 
-STATIC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static'))
-TEMPLATES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates'))
-KEY_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'rsa_key.p8'))
+STATIC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static"))
+TEMPLATES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "templates"))
+KEY_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "rsa_key.p8"))
 
 setup_logging()
 SnowflakeDB.set_key_file(KEY_FILE)
