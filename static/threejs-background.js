@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sprite.position.z = Math.random() * 20 - 30;
         
         // Scale sprites based on data
-        const scale = 0.2 + Math.random() * 0.3;
+        const scale = 0.2 + Math.random() * 1.2;
         sprite.scale.set(scale, scale, 1);
         
         // Store velocity for animation

@@ -5,6 +5,8 @@ A serverless Flask application deployed on Azure Functions with HTTP triggers, f
 ## 🚀 Live Application
 **URL**: https://snow-flask-whoami-az.azurewebsites.net/
 
+** THIS REPO IS NO LONGER MAINTAINED **
+
 ## ✨ Features
 
 ### Interactive Visualizations
